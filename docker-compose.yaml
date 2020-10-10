@@ -15,12 +15,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     # адрес файла, где хранятся переменные окружения
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+    env_file:
+      - ./.env
       
   web:
     build: .
@@ -31,3 +27,5 @@ services:
     # "зависит от", 
     depends_on:
       - db
+    env_file:
+      - ./.env
